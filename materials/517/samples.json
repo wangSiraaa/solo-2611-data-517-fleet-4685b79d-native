@@ -1,0 +1,25 @@
+{
+  "old_members": [
+    "B",
+    "C"
+  ],
+  "old_selected_indices": [
+    1
+  ],
+  "new_rows": [
+    [
+      "A",
+      3
+    ],
+    [
+      "B",
+      5
+    ],
+    [
+      "C",
+      7
+    ]
+  ],
+  "expected_selected": "C",
+  "expected_sum": "7"
+}
