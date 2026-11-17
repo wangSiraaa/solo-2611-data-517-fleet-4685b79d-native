@@ -1,0 +1,66 @@
+========================================================================
+1. refresh: old dictionary [B,C] with C selected, new source adds A
+   and swaps the column order (amount, region)
+========================================================================
+before: fields=['region', 'amount'] selection=[('s', 'C')]
+cache 'sales-cache' refreshed:
+  source_sha256 = a6c504c25ccdc370859625ebde1ba206a488966ef0c19fc866bb4f815adbb827
+  fields        = amount, region
+  members       = amount:3, region:3
+  records       = 3
+  pivots        = sales, count
+  slicers       = region
+written: deliverables/workbook.refreshed.zip
+
+========================================================================
+2. unpack the refreshed package and verify relationships + records
+========================================================================
+  unpacked/_rels/package.xml
+  unpacked/controls/region.xml
+  unpacked/opaque/vendor.bin
+  unpacked/parts/cx.xml
+  unpacked/reports/p7.xml
+  unpacked/reports/p8.xml
+  [OK  ] relationships part byte-identical to the original
+    rel id='cache-main' kind='cache' target='parts/cx.xml'
+    rel id='sales-pivot' kind='pivot' target='reports/p7.xml'
+    rel id='count-pivot' kind='pivot' target='reports/p8.xml'
+    rel id='region-choice' kind='slicer' target='controls/region.xml'
+  cache id='sales-cache' fields=['amount', 'region']
+    dictionary amount: [('n', '3'), ('n', '5'), ('n', '7')]
+    dictionary region: [('s', 'A'), ('s', 'B'), ('s', 'C')]
+  [OK  ] cache_id preserved
+  [OK  ] fields follow the source column order -- ['amount', 'region']
+  [OK  ] records equal the source rows (typed, in order) -- 3 records
+  [OK  ] source_sha256 == sha256(source.json bytes) -- a6c504c25ccdc370…
+  [OK  ] opaque part byte-identical
+
+========================================================================
+3. selection identity: still C, not the B now sitting at old index 1
+========================================================================
+  new region dictionary: [('s', 'A'), ('s', 'B'), ('s', 'C')]
+  old index 1 would now resolve to: ('s', 'B')
+  stored selection: [('s', 'C')]
+  [OK  ] selected member is ('s','C')
+  [OK  ] selection is not missing
+  [OK  ] slicer field position migrated to the new column order
+
+========================================================================
+4. pivot outputs vs. aggregates computed independently from source.json
+========================================================================
+  independent (source.json, region=='C'): sum={'C': '7'} count={'C': '1'}
+  pivot 'sales' (sum of amount by region): {'C': '7'}
+  [OK  ] pivot 'sales' matches the independent computation
+  pivot 'count' (count of amount by region): {'C': '1'}
+  [OK  ] pivot 'count' matches the independent computation
+  [OK  ] samples.json: expected_selected
+  [OK  ] samples.json: expected_sum
+
+========================================================================
+5. re-read the written package in a new process
+========================================================================
+  selection: [('s', 'C')]
+  sales: {('[{"kind": "s", "v": "C"}]', '[]'): '7'}
+  count: {('[{"kind": "s", "v": "C"}]', '[]'): '1'}
+  sha: a6c504c25ccdc370859625ebde1ba206a488966ef0c19fc866bb4f815adbb827
+  [OK  ] new process re-read the package

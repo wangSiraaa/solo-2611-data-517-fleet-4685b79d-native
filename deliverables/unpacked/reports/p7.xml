@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<pivot id="sales" cache_rel="cache-main" row="1" column="" measure="0" aggregate="sum"><filters /><results><cell row_key="[{&quot;kind&quot;: &quot;s&quot;, &quot;v&quot;: &quot;C&quot;}]" column_key="[]" value="7" /></results></pivot>

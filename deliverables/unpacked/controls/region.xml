@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<slicer id="region" cache_rel="cache-main" field="1" mode="explicit"><selection><item kind="s" v="C" missing="0" /></selection><targets><pivot rel="sales-pivot" /><pivot rel="count-pivot" /></targets></slicer>

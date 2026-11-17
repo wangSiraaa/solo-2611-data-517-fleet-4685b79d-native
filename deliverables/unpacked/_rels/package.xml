@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<relationships><rel id="cache-main" kind="cache" target="parts/cx.xml" /><rel id="sales-pivot" kind="pivot" target="reports/p7.xml" /><rel id="count-pivot" kind="pivot" target="reports/p8.xml" /><rel id="region-choice" kind="slicer" target="controls/region.xml" /></relationships>

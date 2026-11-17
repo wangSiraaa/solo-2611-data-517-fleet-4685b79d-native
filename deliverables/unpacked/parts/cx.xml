@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<cache id="sales-cache" source_sha256="a6c504c25ccdc370859625ebde1ba206a488966ef0c19fc866bb4f815adbb827"><fields><field name="amount"><sharedItems><n v="3" /><n v="5" /><n v="7" /></sharedItems></field><field name="region"><sharedItems><s v="A" /><s v="B" /><s v="C" /></sharedItems></field></fields><records><r i="0 0" /><r i="1 1" /><r i="2 2" /></records></cache>
